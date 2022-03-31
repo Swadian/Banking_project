@@ -6,3 +6,5 @@ Accounts and cards can havethree types: basic, credit and salary. Credit allows 
 while salary implements a basic method of adding a fixed amount to the balance, for convenience. <br>
 Transfers can either be of the basic one-time type or have a built-in recurrence, with a method that automatically checks for any due re-payments and creates the 
 necessary new transfers.
+## Services
+While the main class implements the GUI, the vast majority of the logic in the methods is located in the service class. One can declare multiple instances of the service class, if one desires to administrate different banking "databases".
