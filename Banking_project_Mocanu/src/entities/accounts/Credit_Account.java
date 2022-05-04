@@ -9,6 +9,9 @@ public class Credit_Account extends Base_Account{
         super(IBAN,balance);
         this.interest=interest;
     }
+    
+    public float getInterest(){return this.interest;}
+    
     @Override
     public int AddFunds(int amount)
     {

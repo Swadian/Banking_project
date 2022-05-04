@@ -24,7 +24,7 @@ public class storage_read{
         Integer balance=0;
         String IBAN="";
         String type="";
-        String extra="";//will be 0 for base
+        String extra="";//can be 0 for base
         while (scanner.hasNext()) {
             String data = scanner.next();
             if (index == 0)

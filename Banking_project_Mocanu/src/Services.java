@@ -160,6 +160,9 @@ public class Services {
         }
     }
     }
+    public void store_accounts(){
+        storage_write.write_storage("storage.csv", this.Accounts);
+    }
 
     public void printRecurrencesOf(String IBAN){
         for(Recurrent_Transfer r : Recurrents) {

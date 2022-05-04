@@ -10,6 +10,7 @@ public class Salary_Account extends Base_Account{
         super(IBAN,balance);
         this.Monthly_Income=monthly;
     }
+    public Integer getSalary(){return this.Monthly_Income;}
     @Override
     public void Monthly_Operation()
     {
