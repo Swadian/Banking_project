@@ -18,6 +18,7 @@ public static void main(String args[]){
 
         switch (command){
             case 0:
+            scanner.close();
                 return;
             case 1:
                 System.out.println(TYPES);

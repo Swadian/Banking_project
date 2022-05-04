@@ -1,6 +1,5 @@
 package entities.accounts;
 
-import entities.cards.Credit_Card;
 
 import java.lang.Math;
 public class Credit_Account extends Base_Account{

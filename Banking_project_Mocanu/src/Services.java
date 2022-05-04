@@ -7,6 +7,7 @@ import entities.cards.Salary_Card;
 import entities.transfers.Base_Transfer;
 import entities.transfers.Recurrent_Transfer;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -16,6 +17,14 @@ import java.util.Scanner;
 
 public class Services {
     Scanner scanner = new Scanner(System.in);
+    Services(){
+        storage_read storage = new storage_read();
+        try {
+            Accounts = (ArrayList<Base_Account>) storage.read_Accounts("storage.csv");
+        } catch (IOException e) {
+            System.out.println("couldn't store");
+        }
+    }
     private ArrayList<Base_Account> Accounts= new ArrayList<>();
     private ArrayList<Base_Card> Cards= new ArrayList<>();
     private List<Base_Transfer> TransferLog = new ArrayList<>();
