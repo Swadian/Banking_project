@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 public class Services {
     Scanner scanner = new Scanner(System.in);
+    audit log=null;
     Services(){
         storage_read storage = new storage_read();
         try {
@@ -24,6 +25,7 @@ public class Services {
         } catch (IOException e) {
             System.out.println("couldn't store");
         }
+        log = audit.get_instance();
     }
     private ArrayList<Base_Account> Accounts= new ArrayList<>();
     private ArrayList<Base_Card> Cards= new ArrayList<>();
@@ -67,15 +69,18 @@ public class Services {
         receiver.getAccount().AddFunds(amount);
         sender.getAccount().AddFunds((-1*amount));
         TransferLog.add(new Base_Transfer(amount,sender.getAccount(),receiver.getAccount(),0f, LocalDateTime.now()));
+        log.add_to_log("transfer");
     }
     public void executeMonthlyOperations(){
         for(Base_Account account : Accounts)
                 account.Monthly_Operation();
+                log.add_to_log("monthly_ops");
     }
     public void Print_logs(){
         for(Object transfer : TransferLog){
             System.out.println(transfer);
         }
+        log.add_to_log("print_logs");
     }
 
     public void addAccount(int type)//0=base,1=credit,2=salary
@@ -96,6 +101,7 @@ public class Services {
             int monthly=scanner.nextInt();
             Accounts.add(new Salary_Account(IBAN,0,monthly));
         }
+        log.add_to_log("add_acc");
     }
     public void addCard(int type){//0=base,1=credit,2=salary
         int cvv;
@@ -141,6 +147,7 @@ public class Services {
             }
             Cards.add(new Salary_Card(name,surname,cvv,code,pin,(Salary_Account)acc));
         }
+        log.add_to_log("add_card");
     }
 
     public void printCard(){
@@ -148,9 +155,11 @@ public class Services {
         String code=scanner.next();
         Base_Card toPrint=Login(code);
         System.out.println(toPrint);
+        log.add_to_log("print_card");
     }
 
     public void printAccountBalance(){
+    log.add_to_log("print_acc_balance");
     System.out.println("IBAN: ");
     String IBAN=scanner.next();
     for(Base_Account toPrint :Accounts){
@@ -169,6 +178,7 @@ public class Services {
             if (r.getSource().getIBAN().equals(IBAN))
                 System.out.println(r);
         }
+        log.add_to_log("print_recc_of");
     }
     public void addRecurrentTransfer(){
         System.out.println("Card code:");
@@ -198,6 +208,7 @@ public class Services {
         d=scanner.nextInt();
         Period p = Period.parse(String.format("P%sY%sM%sD",y,m,d));
         Recurrents.add(new Recurrent_Transfer(amount,sender.getAccount(),receiver.getAccount(),0f, LocalDateTime.now(),p));
+        log.add_to_log("add_recc");
     }
     public void checkRecurrences(){
         for(Recurrent_Transfer r : Recurrents){
@@ -206,6 +217,7 @@ public class Services {
                 r.setTime(LocalDateTime.now());
             }
         }
+        log.add_to_log("check_recc");
     }
 
 }
