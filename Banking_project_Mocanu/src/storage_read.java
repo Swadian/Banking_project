@@ -11,7 +11,7 @@ import entities.accounts.Salary_Account;
 public class storage_read{
 
     public List<Base_Account> read_Accounts(String filename)throws IOException{
-    BufferedReader reader = new BufferedReader(new FileReader("Banking_project_Mocanu/src/resources/"+filename));
+    BufferedReader reader = new BufferedReader(new FileReader("src/resources/"+filename));
     String line = null;
     Scanner scanner = null;
     int index = 0;

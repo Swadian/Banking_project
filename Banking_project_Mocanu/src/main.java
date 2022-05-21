@@ -4,11 +4,12 @@ public class main {
 
 
 public static void main(String args[]){
+
     int command;
     Services s = new Services();
     String COMMS="\n0.Exit\n1.Add Account\n2.Add Card\n3.Add Transfer\n4.Print log of transfers" +
             "\n5.Manually execute monthly operations\n6.Print card\n7.Print account balance\n8.Print recurrent transfers of an account" +
-            "\n9.Add new recurrent transfer\n10.Check list for due transfers";
+            "\n9.Add new recurrent transfer\n10.Check list for due transfers\n11.Add money to an account";
     String TYPES="\nType ?\n0.Base\n1.Credit\n2.Salary";
     Scanner scanner = new Scanner(System.in);
     int type;
@@ -19,7 +20,7 @@ public static void main(String args[]){
         switch (command){
             case 0:
             scanner.close();
-            s.store_accounts();
+                 s.store_accounts();
                 return;
             case 1:
                 System.out.println(TYPES);
@@ -50,10 +51,16 @@ public static void main(String args[]){
                 System.out.println("IBAN: ");
                 String IBAN=scanner.next();
                 s.printRecurrencesOf(IBAN);
+                break;
             case 9:
                 s.addRecurrentTransfer();
+                break;
             case 10:
                 s.checkRecurrences();
+                break;
+            case 11:
+                s.addMoneyToAccount();
+                break;
         }
     }
 

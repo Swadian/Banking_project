@@ -19,11 +19,14 @@ public class Services {
     Scanner scanner = new Scanner(System.in);
     audit log=null;
     Services(){
-        storage_read storage = new storage_read();
+//        storage_read storage = new storage_read();
+        Database db = Database.getInstance();
         try {
-            Accounts = (ArrayList<Base_Account>) storage.read_Accounts("storage.csv");
-        } catch (IOException e) {
-            System.out.println("couldn't store");
+            Accounts = (ArrayList<Base_Account>) db.getAccounts();
+        // (ArrayList<Base_Account>) storage.read_Accounts("storage.csv");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("couldn't read");
         }
         log = audit.get_instance();
     }
@@ -170,9 +173,26 @@ public class Services {
     }
     }
     public void store_accounts(){
-        storage_write.write_storage("storage.csv", this.Accounts);
+        Database db = Database.getInstance();
+        db.postAccounts(this.Accounts);
+      //  storage_write.write_storage("storage.csv", this.Accounts);
     }
 
+    public void addMoneyToAccount(){
+        log.add_to_log("add_money_to_acc");
+        System.out.println("IBAN: ");
+        String IBAN=scanner.next();
+        System.out.println("sum: ");
+        Integer sum = scanner.nextInt();
+        for(Base_Account toAdd :Accounts){
+            if(toAdd.getIBAN().equals(IBAN)){
+                toAdd.AddFunds(sum);
+                Database.getInstance().updateAccountBalance(toAdd);
+                return;
+            }
+        }
+
+    }
     public void printRecurrencesOf(String IBAN){
         for(Recurrent_Transfer r : Recurrents) {
             if (r.getSource().getIBAN().equals(IBAN))

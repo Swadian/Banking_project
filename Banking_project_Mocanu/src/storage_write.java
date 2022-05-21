@@ -10,7 +10,7 @@ import entities.accounts.Salary_Account;
 public class storage_write {
     public static void write_storage(String filename,List<Base_Account> source){
     try {
-        File storage = new File("Banking_project_Mocanu/src/resources/"+filename);
+        File storage = new File("src/resources/"+filename);
         if(!storage.createNewFile()){storage.delete();storage.createNewFile();}
         ListIterator<Base_Account> it = source.listIterator();
         PrintWriter writer = new PrintWriter(storage);
@@ -33,6 +33,7 @@ public class storage_write {
         }
         writer.close();
     } catch (Exception e) {
+        System.out.println("can't write");
     }
 }
 }
