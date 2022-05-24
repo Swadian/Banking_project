@@ -160,7 +160,22 @@ public class Services {
         System.out.println(toPrint);
         log.add_to_log("print_card");
     }
-
+    public void closeAccount(){
+        log.add_to_log("remove_account");
+        System.out.println("IBAN: ");
+        String IBAN=scanner.next();
+        for(Base_Account toRemove :Accounts){
+            if(toRemove.getIBAN().equals(IBAN)){
+                Accounts.remove(toRemove);
+                for(Base_Card card : Cards)
+                    if(card.getAccount().equals(toRemove))
+                    {
+                        Cards.remove(card);
+                    }
+                Database.getInstance().deleteAccount(toRemove);
+            }
+        }
+    }
     public void printAccountBalance(){
     log.add_to_log("print_acc_balance");
     System.out.println("IBAN: ");

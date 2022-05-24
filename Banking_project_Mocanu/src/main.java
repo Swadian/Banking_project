@@ -9,7 +9,7 @@ public static void main(String args[]){
     Services s = new Services();
     String COMMS="\n0.Exit\n1.Add Account\n2.Add Card\n3.Add Transfer\n4.Print log of transfers" +
             "\n5.Manually execute monthly operations\n6.Print card\n7.Print account balance\n8.Print recurrent transfers of an account" +
-            "\n9.Add new recurrent transfer\n10.Check list for due transfers\n11.Add money to an account";
+            "\n9.Add new recurrent transfer\n10.Check list for due transfers\n11.Add money to an account\n12.Close an account";
     String TYPES="\nType ?\n0.Base\n1.Credit\n2.Salary";
     Scanner scanner = new Scanner(System.in);
     int type;
@@ -60,6 +60,9 @@ public static void main(String args[]){
                 break;
             case 11:
                 s.addMoneyToAccount();
+                break;
+            case 12:
+                s.closeAccount();
                 break;
         }
     }
